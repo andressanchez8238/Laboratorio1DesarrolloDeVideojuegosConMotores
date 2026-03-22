@@ -7,6 +7,8 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval = 2f;
     public bool EnableSpawner;
     public float counter;
+    public int MaxEnemy=5;
+    public int EnemyActive;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,7 +23,10 @@ public class EnemySpawner : MonoBehaviour
             counter += Time.deltaTime;
             if (counter > spawnInterval)
             {
-                SpawnEnemy();
+                if (EnemyActive<MaxEnemy) 
+                {
+                    SpawnEnemy();
+                }
                 counter = 0f;
             }
         }
@@ -59,5 +64,6 @@ public class EnemySpawner : MonoBehaviour
         Vector3 FinalPosition = origin + dir * Random.Range(0, range);
 
         obj.transform.position = FinalPosition;
+        ++EnemyActive;
     }
 }
